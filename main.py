@@ -1,9 +1,7 @@
 import pygame
+from constants import WIDTH, HEIGHT, FPS
 
 pygame.init()
-
-FPS = 60
-WIDTH, HEIGHT = 800, 800
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Snake Game")
