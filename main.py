@@ -1,15 +1,20 @@
 import pygame
 from constants import WIDTH, HEIGHT, FPS
+from board import Board
 
 pygame.init()
 
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+win = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Snake Game")
 
 
 def game():
     run = True
     clock = pygame.time.Clock()
+
+    board = Board(win)
+    board.create_board()
+    pygame.display.update()
 
     while run:
         clock.tick(FPS)

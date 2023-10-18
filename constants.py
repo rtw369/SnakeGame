@@ -1,2 +1,9 @@
+# Window
 WIDTH, HEIGHT = 850, 850
 FPS = 60
+ROWS, COLS = 17, 17
+SIDE = 50
+
+# Colors
+GREEN = (50, 205, 50)
+MINT = (144, 238, 144)
