@@ -1,6 +1,6 @@
 # Window
 WIDTH, HEIGHT = 850, 850
-FPS = 60
+FPS = 5
 ROWS, COLS = 17, 17
 SIDE = 50
 

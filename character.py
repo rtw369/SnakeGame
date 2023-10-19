@@ -88,17 +88,70 @@ class Head:
                 # For some reason, the orientation is not set.
                 pygame.draw.rect(self.win, BLACK, (self.x, self.y, SIDE, SIDE))
 
+    def move(self):
+        match self.orientation:
+            case "right":
+                self.x += SIDE
+            case "left":
+                self.x -= SIDE
+            case "top":
+                self.y -= SIDE
+            case "bottom":
+                self.y += SIDE
+            case _:
+                self.x = 0
+                self.y = 0
+
 
 class Body:
-    def __init__(self, x, y, link):
+    def __init__(self, win, x, y, link):
+        self.win = win
         self.x = x
         self.y = y
+        self.orientation = "right"
         # link refers to the object ahead of this object
         self.link = link
         self.is_tail = False
 
-    def change_to_tail(self):
+    def make_tail(self):
         self.is_tail = True
 
-    def draw():
-        pass
+    def make_body(self):
+        self.is_tail = False
+
+    def draw(self):
+        if self.is_tail:
+            center_x, center_y = self.x + (SIDE // 2), self.y + (SIDE // 2)
+
+            pygame.draw.circle(self.win, BLUE, (center_x, center_y), SIDE // 2)
+            match self.orientation:
+                case "left":
+                    pygame.draw.rect(
+                        self.win, BLUE, (self.x, self.y, (SIDE // 2), SIDE)
+                    )
+                case "right":
+                    pygame.draw.rect(
+                        self.win,
+                        BLUE,
+                        (self.x + (SIDE // 2), self.y, (SIDE // 2), SIDE),
+                    )
+                case "bottom":
+                    pygame.draw.rect(
+                        self.win,
+                        BLUE,
+                        (self.x, self.y + (SIDE // 2), SIDE, (SIDE // 2)),
+                    )
+                case "top":
+                    pygame.draw.rect(
+                        self.win, BLUE, (self.x, self.y, SIDE, (SIDE // 2))
+                    )
+                case _:
+                    # For some reason, the orientation is not set.
+                    pygame.draw.rect(self.win, BLACK, (self.x, self.y, SIDE, SIDE))
+        else:
+            pygame.draw.rect(self.win, BLUE, (self.x, self.y, SIDE, SIDE))
+
+    def move(self):
+        self.x = self.link.x
+        self.y = self.link.y
+        self.orientation = self.link.orientation
