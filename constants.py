@@ -2,7 +2,7 @@ import pygame
 
 # Window
 WIDTH, HEIGHT = 850, 850
-FPS = 10
+FPS = 15
 ROWS, COLS = 17, 17
 SIDE = 50
 

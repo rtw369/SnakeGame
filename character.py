@@ -116,13 +116,13 @@ class Head:
 
 
 class Body:
-    def __init__(self, win, x, y, link):
+    def __init__(self, win, link):
         self.win = win
-        self.x = x
-        self.y = y
-        self.orientation = "right"
         # link refers to the object ahead of this object
         self.link = link
+        self.x = -50
+        self.y = -50
+        self.orientation = "right"
         self.is_tail = False
 
     def get_x(self):
@@ -130,6 +130,9 @@ class Body:
 
     def get_y(self):
         return self.y
+
+    def get_orientation(self):
+        return self.orientation
 
     def make_tail(self):
         self.is_tail = True
@@ -170,6 +173,6 @@ class Body:
             pygame.draw.rect(self.win, BLUE, (self.x, self.y, SIDE, SIDE))
 
     def move(self):
-        self.x = self.link.x
-        self.y = self.link.y
-        self.orientation = self.link.orientation
+        self.x = self.link.get_x()
+        self.y = self.link.get_y()
+        self.orientation = self.link.get_orientation()

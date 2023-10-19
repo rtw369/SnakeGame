@@ -34,17 +34,13 @@ def game():
     board = Board(win)
     board.create_board()
 
+    starting_x, starting_y = SIDE * 6, SIDE * 8
+
     character = [
-        Head(win, SIDE * 2, SIDE * 0),
+        Head(win, starting_x, starting_y),
     ]
-    character.append(Body(win, SIDE * 1, SIDE * 0, character[0]))
-    character.append(Body(win, SIDE * 0, SIDE * 0, character[1]))
-    character.append(Body(win, SIDE * 0, SIDE * 0, character[2]))
-    character.append(Body(win, SIDE * 0, SIDE * 0, character[3]))
-    character.append(Body(win, SIDE * 0, SIDE * 0, character[4]))
-    character.append(Body(win, SIDE * 0, SIDE * 0, character[5]))
-    character.append(Body(win, SIDE * 0, SIDE * 0, character[6]))
-    character.append(Body(win, SIDE * 0, SIDE * 0, character[7]))
+    character.append(Body(win, character[0]))
+    character.append(Body(win, character[1]))
 
     # for parts in character:
     #     parts.draw()
