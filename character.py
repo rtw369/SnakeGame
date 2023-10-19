@@ -9,6 +9,18 @@ class Head:
         self.y = y
         self.orientation = "right"
 
+    def get_x(self):
+        return self.x
+
+    def get_y(self):
+        return self.y
+
+    def get_orientation(self):
+        return self.orientation
+
+    def set_orientation(self, direction):
+        self.orientation = direction
+
     def draw(self):
         center_x, center_y = self.x + (SIDE // 2), self.y + (SIDE // 2)
         eye_radius = 5
@@ -112,6 +124,12 @@ class Body:
         # link refers to the object ahead of this object
         self.link = link
         self.is_tail = False
+
+    def get_x(self):
+        return self.x
+
+    def get_y(self):
+        return self.y
 
     def make_tail(self):
         self.is_tail = True
