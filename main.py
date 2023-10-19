@@ -1,6 +1,7 @@
 import pygame
 from constants import WIDTH, HEIGHT, FPS
 from board import Board
+from character import Head
 
 pygame.init()
 
@@ -14,7 +15,8 @@ def game():
 
     board = Board(win)
     board.create_board()
-    pygame.display.update()
+
+    character = Head(win, 0, 0)
 
     while run:
         clock.tick(FPS)
@@ -23,6 +25,10 @@ def game():
             if event.type == pygame.QUIT:
                 run = False
                 break
+
+        character.draw()
+
+        pygame.display.update()
 
     pygame.quit()
 
