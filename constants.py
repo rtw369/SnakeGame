@@ -2,7 +2,7 @@ import pygame
 
 # Window
 WIDTH, HEIGHT = 850, 850
-FPS = 10
+FPS = 15
 ROWS, COLS = 17, 17
 SIDE = 50
 
@@ -15,4 +15,5 @@ RED = (255, 0, 0)
 
 # Font
 pygame.font.init()
-FONT = pygame.font.SysFont("comicsans", 50)
+GAME_FONT = pygame.font.SysFont("comicsans", 50)
+SCORE_FONT = pygame.font.SysFont("comicsans", 30)

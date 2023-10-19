@@ -15,10 +15,10 @@ class Board:
 
 
 class Apple:
-    def __init__(self, win, x, y):
+    def __init__(self, win):
         self.win = win
-        self.x = x
-        self.y = y
+        self.x = None
+        self.y = None
 
     def draw(self):
         pygame.draw.circle(
