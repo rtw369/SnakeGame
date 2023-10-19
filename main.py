@@ -1,6 +1,6 @@
 import pygame
 from constants import WIDTH, HEIGHT, FPS, SIDE, FONT
-from board import Board
+from board import Board, Apple
 from character import Head, Body
 
 pygame.init()
@@ -33,6 +33,9 @@ def game():
 
     board = Board(win)
     board.create_board()
+
+    apple = Apple(win, 0, 0)
+    apple.draw()
 
     starting_x, starting_y = SIDE * 6, SIDE * 8
 
@@ -81,6 +84,7 @@ def game():
             character[0].set_orientation("bottom")
 
         board.create_board()
+        apple.draw()
 
         character[-2].make_body()
         character[-1].make_tail()
