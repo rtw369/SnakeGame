@@ -152,6 +152,7 @@ class Game:
             self.character[i].move()
             self.character[i].draw()
 
+        self.score_text = SCORE_FONT.render(f"{self.score}", 1, "white")
         self.win.blit(self.score_text, (10, 10))
 
         pygame.display.update()
@@ -178,27 +179,38 @@ class Game:
         ):
             self.score += 1
             self.character.append(Body(self.win, self.character[-1]))
-            self.move_apple()
+            game_over = self.move_apple()
+
+            if game_over:
+                return True
 
         return False
 
     def move_apple(self):
-        available_positions = self.get_empty_positions()
+        available_positions, has_positions = self.get_empty_positions()
+        random_index = random.randint(0, len(available_positions) - 1)
 
-        if len(available_positions) > 0:
-            self.apple.set_position(available_positions.pop())
+        if has_positions:
+            self.apple.set_position(available_positions[random_index])
+            return False
+        else:
+            return True
 
     def get_empty_positions(self):
-        positions = set()
+        positions = []
         for i in range(ROWS):
             for j in range(COLS):
-                positions.add((i * SIDE, j * SIDE))
+                positions.append((i * SIDE, j * SIDE))
 
-        player_position = set()
         for body in self.character:
-            player_position.add((body.get_x(), body.get_y()))
+            body_pos = (body.get_x(), body.get_y())
+            if body_pos in positions:
+                positions.remove(body_pos)
 
-        return positions.difference(player_position)
+        if len(positions) <= 0:
+            return positions, False
+
+        return positions, True
 
     def player_input(self):
         keys = pygame.key.get_pressed()
