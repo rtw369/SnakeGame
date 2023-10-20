@@ -1,7 +1,8 @@
 import pygame
-from constants import WIDTH, HEIGHT, FPS, SIDE, GAME_FONT, SCORE_FONT
+from constants import WIDTH, HEIGHT, FPS, ROWS, COLS, SIDE, GAME_FONT, SCORE_FONT
 from board import Board, Apple
 from character import Head, Body
+import random
 
 
 class Game:
@@ -37,6 +38,7 @@ class Game:
         self.starting_x, self.starting_y = SIDE * 6, SIDE * 7
 
         self.apple = Apple(self.win)
+        self.move_apple()
 
         self.score = 0
 
@@ -140,7 +142,8 @@ class Game:
 
     def update_game(self):
         self.board.create_board()
-        # self.apple.draw()
+
+        self.apple.draw()
 
         self.character[-2].make_body()
         self.character[-1].make_tail()
@@ -168,7 +171,34 @@ class Game:
             ):
                 return True
 
+        # Check if head hits the apple.
+        if (
+            self.character[0].get_x() == self.apple.get_x()
+            and self.character[0].get_y() == self.apple.get_y()
+        ):
+            self.score += 1
+            self.character.append(Body(self.win, self.character[-1]))
+            self.move_apple()
+
         return False
+
+    def move_apple(self):
+        available_positions = self.get_empty_positions()
+
+        if len(available_positions) > 0:
+            self.apple.set_position(available_positions.pop())
+
+    def get_empty_positions(self):
+        positions = set()
+        for i in range(ROWS):
+            for j in range(COLS):
+                positions.add((i * SIDE, j * SIDE))
+
+        player_position = set()
+        for body in self.character:
+            player_position.add((body.get_x(), body.get_y()))
+
+        return positions.difference(player_position)
 
     def player_input(self):
         keys = pygame.key.get_pressed()

@@ -27,3 +27,13 @@ class Apple:
             (self.x + (SIDE // 2), self.y + (SIDE // 2)),
             (SIDE // 2) - 10,
         )
+
+    def set_position(self, pos):
+        self.x = pos[0]
+        self.y = pos[1]
+
+    def get_x(self):
+        return self.x
+
+    def get_y(self):
+        return self.y
